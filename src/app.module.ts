@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
+import { UserRepository } from './repositories/auth.repository';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { User } from './entities/user.entity';
       type: 'mongodb',
       host: 'localhost',
       port: 27017,
-      database: 'my-nestjs-db',
+      database: 'nest-course',
       entities: [User],
       synchronize: true,
     }),

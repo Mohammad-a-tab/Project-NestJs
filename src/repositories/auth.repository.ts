@@ -1,8 +1,8 @@
-import { EntityRepository, Repository } from "typeorm";
-import { RegisterUserDTO } from "./dto/register-user.dto";
-import { User } from "./user.entity";
-import * as bcrypt from 'bcrypt'
 import { BadRequestException, InternalServerErrorException } from "@nestjs/common";
+import { RegisterUserDTO } from "src/auth/dto/register-user.dto";
+import { EntityRepository, Repository } from "typeorm";
+import { User } from "src/entities/user.entity";
+import * as bcrypt from 'bcrypt'
 @EntityRepository(User)
 export class UserRepository extends Repository<User>{
     async createUser(registerUserDto: RegisterUserDTO) : Promise<object>{
