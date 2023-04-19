@@ -8,6 +8,7 @@ import { UserRepository } from './repositories/auth.repository';
 
 @Module({
   imports: [
+    AuthModule,
     TypeOrmModule.forRoot({
       type: 'mongodb',
       host: 'localhost',
@@ -16,9 +17,9 @@ import { UserRepository } from './repositories/auth.repository';
       entities: [User],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([UserRepository]),
-    AuthModule],
+    TypeOrmModule.forFeature([UserRepository])
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}
