@@ -5,6 +5,7 @@ import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
 import { UserRepository } from 'src/repositories/auth.repository';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -19,5 +20,6 @@ import { UserRepository } from 'src/repositories/auth.repository';
   ],
   providers: [AuthService, UserRepository],
   controllers: [AuthController],
+  exports: [PassportModule]
 })
 export class AuthModule {}
