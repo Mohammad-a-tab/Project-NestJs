@@ -6,6 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { LoginUserDTO } from "./dto/login-user.dto";
 import { AccessToken } from "./token.interface";
 import { Payload } from "./auth.payload";
+import { JwtService } from "@nestjs/jwt";
 @Injectable()
 export class AuthService {
     constructor(
@@ -19,10 +20,10 @@ export class AuthService {
     }
     async signin(loginUserDto: LoginUserDTO): Promise<AccessToken> {
         let { email, password } = loginUserDto;
-        const user = await this.userRepository.findOne({ email });
+        const user = await this.userRepository.findOneBy({ email });
         const payload: Payload = { email: user.email }
         if (user && bcrypt.compareSync(password, user.password)) {
-            let accessToken = await this.jwtService.sign(payload)
+            let accessToken = this.jwtService.sign(payload)
             user.token = accessToken
             const response = await this.userRepository.save(user).then(user => {
                 return {accessToken : user.token}
