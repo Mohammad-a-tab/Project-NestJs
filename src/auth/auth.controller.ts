@@ -13,8 +13,8 @@ export class AuthController {
     signup(@Body() registerUserDto: RegisterUserDTO): Promise<object> {
         return this.authService.signup(registerUserDto);
     }
-    // @Post('signin')
-    // signin(@Body() loginUserDto: LoginUserDTO): Promise<AccessToken> {
-    //     return this.authService.signin(loginUserDto)
-    // }
+    @Post('signin')
+    signin(@Body() loginUserDto: LoginUserDTO): Promise<AccessToken> {
+        return this.authService.signin(loginUserDto)
+    }
 }
