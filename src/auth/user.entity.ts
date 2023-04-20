@@ -1,5 +1,5 @@
 import { Blog } from "src/blog/blog.entity";
-import { Column, CreateDateColumn, Entity, OneToMany, ObjectId, ObjectIdColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, ObjectId, ObjectIdColumn } from "typeorm";
 
 @Entity('users')
 export class User {
@@ -13,8 +13,6 @@ export class User {
     password: string
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
-    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
-    updatedAt: Date
     @Column({ default: "" })
     token: string;
     @OneToMany(_type => Blog, blog => blog.user, {eager: true})
