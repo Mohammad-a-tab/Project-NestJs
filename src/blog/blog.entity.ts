@@ -16,7 +16,7 @@ export class Blog {
     createdAt: Date
     @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
     updatedAt: Date
-    @ManyToOne(_type => User, user => user.blog, {eager: false})
+    @ManyToOne(_type => User, user => user.blogs, {eager: false})
     @Exclude({ toPlainOnly: true })
     user: User
 }
