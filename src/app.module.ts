@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './auth/user.entity';
 import { UserRepository } from './auth/auth.repository';
 import { BlogController } from './blog/blog.controller';
+import { BlogService } from './blog/blog.service';
+import { BlogModule } from './blog/blog.module';
 
 @Module({
   imports: [
@@ -18,9 +20,10 @@ import { BlogController } from './blog/blog.controller';
       entities: [User],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([UserRepository])
+    TypeOrmModule.forFeature([UserRepository]),
+    BlogModule
   ],
   controllers: [AppController, BlogController],
-  providers: [AppService]
+  providers: [AppService, BlogService]
 })
 export class AppModule {}
