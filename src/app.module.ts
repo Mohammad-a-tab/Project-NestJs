@@ -3,8 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
-import { UserRepository } from './repositories/auth.repository';
+import { User } from './auth/user.entity';
+import { UserRepository } from './auth/auth.repository';
 import { BlogController } from './blog/blog.controller';
 
 @Module({

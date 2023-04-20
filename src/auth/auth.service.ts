@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { RegisterUserDTO } from "./dto/register-user.dto";
-import { UserRepository } from "src/repositories/auth.repository";
+import { UserRepository } from "src/auth/auth.repository";
 import * as bcrypt from 'bcrypt';
 import { LoginUserDTO } from "./dto/login-user.dto";
 import { AccessToken } from "./token.interface";
