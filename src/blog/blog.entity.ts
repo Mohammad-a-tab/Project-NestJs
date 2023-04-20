@@ -1,5 +1,6 @@
+import { Exclude } from "class-transformer";
 import { User } from "src/auth/user.entity";
-import { Column, CreateDateColumn, Entity, ObjectIdColumn, OneToMany, UpdateDateColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, ObjectIdColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'blog' })
 export class Blog {
@@ -15,6 +16,7 @@ export class Blog {
     createdAt: Date
     @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
     updatedAt: Date
-    @OneToMany(_type => User, user => user.blog, {eager: false})
-    @Exclude()
+    @ManyToOne(_type => User, user => user.blog, {eager: false})
+    @Exclude({ toPlainOnly: true })
+    user: User
 }
