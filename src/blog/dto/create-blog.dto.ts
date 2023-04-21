@@ -12,6 +12,4 @@ export class CreateBlogDTO {
     @IsNotEmpty()
     @IsString()
     image: string;
-
-
 }

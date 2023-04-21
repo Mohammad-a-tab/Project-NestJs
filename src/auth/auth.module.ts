@@ -14,7 +14,7 @@ import { JwtStrategy } from './jwt.strategy';
     JwtModule.register({
       secret: 'apiChallengeWebLog2021++',
       signOptions: {
-          expiresIn: Date.now() + (1000 * 60 * 60 * 24 * 6)
+          expiresIn: Date.now() + (1000 * 60 * 60 * 24 * 2)
       }
   }),
   PassportModule.register({ defaultStrategy: 'jwt' }),
