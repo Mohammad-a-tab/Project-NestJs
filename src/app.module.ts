@@ -8,22 +8,24 @@ import { UserRepository } from './auth/auth.repository';
 import { BlogController } from './blog/blog.controller';
 import { BlogService } from './blog/blog.service';
 import { BlogModule } from './blog/blog.module';
+import { Blog } from './blog/blog.entity';
+import { BlogRepository } from './blog/blog.repository';
 
 @Module({
   imports: [
     AuthModule,
+    BlogModule,
     TypeOrmModule.forRoot({
       type: 'mongodb',
       host: 'localhost',
       port: 27017,
       database: 'nest-course',
-      entities: [User],
+      entities: [User, Blog],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([UserRepository]),
-    BlogModule
+    TypeOrmModule.forFeature([UserRepository, BlogRepository])
   ],
-  controllers: [AppController, BlogController],
-  providers: [AppService, BlogService]
+  controllers: [AppController],
+  providers: [AppService]
 })
 export class AppModule {}

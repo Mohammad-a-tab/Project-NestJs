@@ -9,7 +9,7 @@ export class BlogService {
     constructor(
         @InjectRepository(BlogRepository) private readonly blogRepository: BlogRepository
     ) {}
-    async createBlog(createBlogDto: CreateBlogDTO, user: User): Promise<CreateBlogDTO>{
+    async createBlog(createBlogDto: CreateBlogDTO, user: User): Promise<object>{
         const mmd = await this.blogRepository.createBlog(createBlogDto, user);
         return mmd
     }
