@@ -5,8 +5,6 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './auth/user.entity';
 import { UserRepository } from './auth/auth.repository';
-import { BlogController } from './blog/blog.controller';
-import { BlogService } from './blog/blog.service';
 import { BlogModule } from './blog/blog.module';
 import { Blog } from './blog/blog.entity';
 import { BlogRepository } from './blog/blog.repository';
@@ -28,4 +26,11 @@ import { BlogRepository } from './blog/blog.repository';
   controllers: [AppController],
   providers: [AppService]
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+
+}
