@@ -10,8 +10,8 @@ export class UserRepository extends Repository<User> {
     }
     async createUser(registerUserDto: RegisterUserDTO) : Promise<object>{
         let { name, email, password } = registerUserDto;
-        const salt = bcrypt.genSaltSync()
-        password = bcrypt.hashSync(password, salt)
+        const salt = await bcrypt.genSaltSync()
+        password = await bcrypt.hashSync(password, salt)
         const user = this.create({name, email, password});
         const userCreated = await this.save(user).then(user => {
             return {

@@ -15,7 +15,6 @@ export class BlogService {
         const blog = this.blogRepository.createBlog(createBlogDto, user);
         const updateUser = this.userRepository.save(blog[0]);
         console.log(updateUser);
-        
         return blog;
     }
 }
