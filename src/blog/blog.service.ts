@@ -13,7 +13,7 @@ export class BlogService {
     ) {}
     async createBlog(createBlogDto: CreateBlogDTO, user: User): Promise<Blog>{
         const blog = await this.blogRepository.createBlog(createBlogDto, user);
-        const updateUser = await this.userRepository.update((await blog).user, { blogs: [blog]});
+        const updateUser = await this.userRepository.updateUser(blog);
         console.log(updateUser);
         return blog;
     }

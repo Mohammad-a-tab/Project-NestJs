@@ -26,22 +26,11 @@ export class UserRepository extends Repository<User> {
         })
         return userCreated;
     }
-    async updateUserForInsertBlog(blog: Blog) : Promise<object>{
-        let { name, email, password } = registerUserDto;
-        const salt = await bcrypt.genSaltSync()
-        password = await bcrypt.hashSync(password, salt)
-        const user = this.create({name, email, password});
-        const userCreated = await this.save(user).then(user => {
-            return {
-                statusCode : 201,
-                message : 'Success',
-                user
-            }
-        }).catch(error => {
-            if(error.code === '23505')throw new BadRequestException('Email already exist please enter another email')
-            throw new InternalServerErrorException("we don't Signup you. Wrong some thing please trining again")
-        })
-        return userCreated;
+    async updateUser(blog: Blog) : Promise<object>{
+        const copyBlog = JSON.parse(JSON.stringify(blog))
+        delete copyBlog.user
+        const updateUser = await this.update(blog.user, { blogs: [copyBlog] });
+        return updateUser;
     }
     
 }
