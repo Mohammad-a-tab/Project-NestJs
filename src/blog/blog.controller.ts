@@ -1,11 +1,13 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Param, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateBlogDTO } from './dto/create-blog.dto';
 import { Blog } from './blog.entity';
+import { BlogIdDTO } from './dto/id-blog.dto';
 
 
 @Controller('blog')
+@UseGuards(AuthGuard())
 export class BlogController {
     constructor(
         private readonly blogService: BlogService
@@ -13,9 +15,22 @@ export class BlogController {
 
     @Post()
     @UseGuards(AuthGuard('jwt'))
-    async createBlog(@Body() createBlogDto: CreateBlogDTO, @Req() req): Promise<Blog> {
+    public createBlog(@Body() createBlogDto: CreateBlogDTO, @Req() req): Promise<Blog> {
         const user = req.user;
         return this.blogService.createBlog(createBlogDto, user);
+    }
+    @Get()
+    public getAllBlogs(@Req() req): Promise<Blog[]> {
+        const user = req.user;
+        const blogs = this.blogService.getAllBlogs(user);
+        return blogs
+    }
+    @Get(':id')
+    public getBlogById(@Param() blogIdDto: BlogIdDTO, @Req() req): Promise<Blog> {
+        const user = req.user;
+        const { id } = blogIdDto
+        const blog = this.blogService.getBlogById(id, user);
+        return blog
     }
 
 }

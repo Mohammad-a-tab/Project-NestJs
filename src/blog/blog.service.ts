@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { BlogRepository } from './blog.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBlogDTO } from './dto/create-blog.dto';
@@ -20,5 +20,12 @@ export class BlogService {
     async getAllBlogs(user: User): Promise<Blog[]> {
         const blogs = await this.blogRepository.find({ where: { user } })
         return blogs
+    }
+    async getBlogById(id: string, user: User): Promise<Blog> {
+        const blog = await this.blogRepository.findOneBy({ id, user });
+        console.log(blog);
+        
+        if (!blog) throw new NotFoundException(`Not Found Blog with id : ${id}`)
+        return blog;
     }
 }
