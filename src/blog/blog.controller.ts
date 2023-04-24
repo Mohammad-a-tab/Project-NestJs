@@ -4,6 +4,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { CreateBlogDTO } from './dto/create-blog.dto';
 import { Blog } from './blog.entity';
 import { BlogIdDTO } from './dto/id-blog.dto';
+import { ObjectId } from 'typeorm';
 
 
 @Controller('blog')
@@ -25,12 +26,11 @@ export class BlogController {
         const blogs = this.blogService.getAllBlogs(user);
         return blogs
     }
-    @Get(':id')
-    public getBlogById(@Param() blogIdDto: BlogIdDTO, @Req() req): Promise<Blog> {
+    @Get(":id")
+    public getBlogById(@Param('id') id: string, @Req() req): Promise<Blog> {
         const user = req.user;
-        const { id } = blogIdDto
-        const blog = this.blogService.getBlogById(id, user);
-        return blog
+        console.log(id);
+        return this.blogService.getBlogById(id, user);
     }
 
 }

@@ -5,6 +5,7 @@ import { CreateBlogDTO } from './dto/create-blog.dto';
 import { User } from 'src/auth/user.entity';
 import { Blog } from './blog.entity';
 import { UserRepository } from 'src/auth/auth.repository';
+import { ObjectId } from 'typeorm';
 @Injectable()
 export class BlogService {
     constructor(
@@ -22,10 +23,11 @@ export class BlogService {
         return blogs
     }
     async getBlogById(id: string, user: User): Promise<Blog> {
-        const blog = await this.blogRepository.findOneBy({ id, user });
-        console.log(blog);
-        
+        const blog = await this.blogRepository.findOne({where: { user } });
         if (!blog) throw new NotFoundException(`Not Found Blog with id : ${id}`)
-        return blog;
+        if(blog.id == id) {
+            return blog;
+        }
+        throw new NotFoundException(`Not Found Blog with id : ${id}`)
     }
 }
