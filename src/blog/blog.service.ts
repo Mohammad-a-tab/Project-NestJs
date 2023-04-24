@@ -17,4 +17,8 @@ export class BlogService {
         console.log(updateUser);
         return blog;
     }
+    async getAllBlogs(user: User): Promise<Blog[]> {
+        const blogs = await this.blogRepository.find({ where: { user } })
+        return blogs
+    }
 }

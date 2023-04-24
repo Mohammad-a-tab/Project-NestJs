@@ -29,6 +29,8 @@ export class UserRepository extends Repository<User> {
     async updateUser(blog: Blog) : Promise<object>{
         const copyBlog = JSON.parse(JSON.stringify(blog))
         delete copyBlog.user
+        delete copyBlog.created_at
+        delete copyBlog.updated_at
         const updateUser = await this.update(blog.user, { blogs: [copyBlog] });
         return updateUser;
     }
