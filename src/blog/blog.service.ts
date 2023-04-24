@@ -12,8 +12,8 @@ export class BlogService {
         @InjectRepository(UserRepository) private readonly userRepository: UserRepository,     
     ) {}
     async createBlog(createBlogDto: CreateBlogDTO, user: User): Promise<Blog>{
-        const blog = this.blogRepository.createBlog(createBlogDto, user);
-        const updateUser = this.userRepository.save(blog[0]);
+        const blog = await this.blogRepository.createBlog(createBlogDto, user);
+        const updateUser = await this.userRepository.update((await blog).user, { blogs: [blog]});
         console.log(updateUser);
         return blog;
     }
