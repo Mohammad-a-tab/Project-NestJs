@@ -1,10 +1,9 @@
-import { Body, Controller, Param, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Param, Get, Post, Req, Delete, UseGuards } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateBlogDTO } from './dto/create-blog.dto';
 import { Blog } from './blog.entity';
 import { BlogIdDTO } from './dto/id-blog.dto';
-import { ObjectId } from 'typeorm';
 
 
 @Controller('blog')
@@ -27,10 +26,15 @@ export class BlogController {
         return blogs
     }
     @Get(":id")
-    public getBlogById(@Param('id') id: string, @Req() req): Promise<Blog> {
+    public getBlogById(@Param() blogIdDto: BlogIdDTO, @Req() req): Promise<Blog> {
         const user = req.user;
-        console.log(id);
+        const { id } = blogIdDto
         return this.blogService.getBlogById(id, user);
     }
-
+    @Get(":id")
+    public getBlogById(@Param() blogIdDto: BlogIdDTO, @Req() req): Promise<Blog> {
+        const user = req.user;
+        const { id } = blogIdDto
+        return this.blogService.getBlogById(id, user);
+    }
 }

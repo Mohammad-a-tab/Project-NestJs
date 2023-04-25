@@ -30,4 +30,10 @@ export class BlogService {
         }
         throw new NotFoundException(`Not Found Blog with id : ${id}`)
     }
+    async deleteBlogById(id: string, user: User): Promise<object> {
+        const blog = await this.getBlogById(id, user);
+        const deleteBlogFromUser = await this.userRepository.delete({blogs: blog})
+        const deleteResult = await this.blogRepository.remove(blog)
+        return {deleteResult, deleteBlogFromUser}
+    }
 }
