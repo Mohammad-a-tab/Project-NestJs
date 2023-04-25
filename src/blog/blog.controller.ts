@@ -12,7 +12,7 @@ export class BlogController {
     constructor(
         private readonly blogService: BlogService
     ) {}
-
+    
     @Post()
     @UseGuards(AuthGuard('jwt'))
     public createBlog(@Body() createBlogDto: CreateBlogDTO, @Req() req): Promise<Blog> {
@@ -31,10 +31,10 @@ export class BlogController {
         const { id } = blogIdDto
         return this.blogService.getBlogById(id, user);
     }
-    @Get(":id")
-    public getBlogById(@Param() blogIdDto: BlogIdDTO, @Req() req): Promise<Blog> {
+    @Delete(":id")
+    public deleteBlogById(@Param() blogIdDto: BlogIdDTO, @Req() req): Promise<object> {
         const user = req.user;
-        const { id } = blogIdDto
-        return this.blogService.getBlogById(id, user);
+        const { id } = blogIdDto;
+        return this.blogService.deleteBlogById(id, user);
     }
 }

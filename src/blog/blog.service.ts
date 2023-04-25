@@ -32,7 +32,7 @@ export class BlogService {
     }
     async deleteBlogById(id: string, user: User): Promise<object> {
         const blog = await this.getBlogById(id, user);
-        const deleteBlogFromUser = await this.userRepository.delete({blogs: blog})
+        const deleteBlogFromUser = await this.userRepository.updateUser(blog)
         const deleteResult = await this.blogRepository.remove(blog)
         return {deleteResult, deleteBlogFromUser}
     }
