@@ -4,6 +4,7 @@ import { User } from "src/auth/user.entity";
 import * as bcrypt from 'bcrypt'
 import { BadRequestException, Injectable, InternalServerErrorException } from "@nestjs/common";
 import { Blog } from "src/blog/blog.entity";
+import { ObjectId } from "mongodb";
 @Injectable()
 export class UserRepository extends Repository<User> {
     constructor(private dataSource: DataSource) {
@@ -33,6 +34,13 @@ export class UserRepository extends Repository<User> {
         delete copyBlog.updated_at
         const updateUser = await this.update(blog.user, { blogs: [copyBlog] });
         return updateUser;
+    }
+    async deleteBlogFromUser(blog: Blog, user: User): Promise<User>{
+        const usermmd = await this.findOne({where:{}, re})
+        
+        console.log(usermmd);
+        
+        return usermmd;
     }
     
 }
