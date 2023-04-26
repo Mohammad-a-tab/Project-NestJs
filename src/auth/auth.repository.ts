@@ -36,10 +36,9 @@ export class UserRepository extends Repository<User> {
         return updateUser;
     }
     async deleteBlogFromUser(blog: Blog, user: User): Promise<User>{
-        const usermmd = await this.findOne({where:{}, re})
-        
+        const UserName = user.name;
+        const usermmd = await this.findOne({where: { name: UserName }, relations: ['blogs']});
         console.log(usermmd);
-        
         return usermmd;
     }
     

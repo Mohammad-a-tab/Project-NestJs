@@ -15,6 +15,6 @@ export class User {
     createdAt: Date;
     @Column({ default: "" })
     token: string;
-    @OneToMany(_type => Blog, blog => blog.user, {eager: true})
+    @OneToMany(() => Blog, (blog) => blog.user)
     blogs: Blog[]
 }
