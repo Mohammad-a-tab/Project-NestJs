@@ -30,6 +30,6 @@ export class BlogRepository extends Repository<Blog> {
             delete updateBlogDto['user']
         }
         await this.update({ id, user }, { ...updateBlogDto })
-        return this.findOne({id})
+        return this.findOneBy({id})
     }
 }

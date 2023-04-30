@@ -1,6 +1,6 @@
 import { Exclude } from "class-transformer";
 import { User } from "src/auth/user.entity";
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from "typeorm"
 
 @Entity({ name: "blog" })
 export class Blog {
