@@ -35,7 +35,7 @@ export class BlogService {
         const deleteResult = await this.blogRepository.remove(blog);
         return {deleteBlogFromUser, deleteResult}
     }
-    public async updateBlog(id, updateBlogDto: UpdateBlogDTO, user: User): Promise<Blog> {
+    public async updateBlog(id: string, updateBlogDto: UpdateBlogDTO, user: User): Promise<Blog> {
         return this.blogRepository.updateBlog(id, updateBlogDto, user);
     }
 }

@@ -3,6 +3,7 @@ import { DataSource, Repository } from 'typeorm';
 import { Blog } from './blog.entity';
 import { CreateBlogDTO } from './dto/create-blog.dto';
 import { User } from 'src/auth/user.entity';
+import { UpdateBlogDTO } from "./dto/update-blog.dto";
 
 @Injectable()
 export class BlogRepository extends Repository<Blog> {
@@ -23,5 +24,12 @@ export class BlogRepository extends Repository<Blog> {
         } else {
             throw new ForbiddenException("Each user can not save more than 10 blogs")
         }
+    }
+    async updateBlog(id: string, updateBlogDto: UpdateBlogDTO, user: User): Promise<Blog> {
+        if (updateBlogDto['user']) {
+            delete updateBlogDto['user']
+        }
+        await this.update({ id, user }, { ...updateBlogDto })
+        return this.findOne({id})
     }
 }
