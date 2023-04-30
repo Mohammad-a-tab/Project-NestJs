@@ -31,7 +31,7 @@ export class BlogService {
     async deleteBlogById(id: string, user: User): Promise<object> {
         const blog = await this.getBlogById(id, user);
         const deleteBlogFromUser = await this.userRepository.deleteBlogFromUser(blog, user);
-        // const deleteResult = await this.blogRepository.remove(blog);
+        const deleteResult = await this.blogRepository.remove(blog);
         return {deleteBlogFromUser}
     }
 }
