@@ -6,6 +6,7 @@ import { User } from 'src/auth/user.entity';
 import { Blog } from './blog.entity';
 import { UserRepository } from 'src/auth/auth.repository';
 import { ObjectId } from 'typeorm';
+import { UpdateBlogDTO } from './dto/update-blog.dto';
 @Injectable()
 export class BlogService {
     constructor(
@@ -32,6 +33,9 @@ export class BlogService {
         const blog = await this.getBlogById(id, user);
         const deleteBlogFromUser = await this.userRepository.deleteBlogFromUser(blog, user);
         const deleteResult = await this.blogRepository.remove(blog);
-        return {deleteBlogFromUser}
+        return {deleteBlogFromUser, deleteResult}
+    }
+    public async updateBlog(id, updateBlogDto: UpdateBlogDTO, user: User): Promise<Blog> {
+        return this.blogRepository.updateBlog(id, updateBlogDto, user);
     }
 }
