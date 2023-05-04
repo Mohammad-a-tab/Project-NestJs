@@ -4,7 +4,7 @@ import { User } from "src/auth/user.entity";
 import * as bcrypt from 'bcrypt'
 import { BadRequestException, Injectable, InternalServerErrorException } from "@nestjs/common";
 import { Blog } from "src/blog/blog.entity";
-import { ObjectId } from "mongodb";
+
 @Injectable()
 export class UserRepository extends Repository<User> {
     constructor(private dataSource: DataSource) {
