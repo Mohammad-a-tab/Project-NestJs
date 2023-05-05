@@ -5,10 +5,12 @@ import { InjectRepository } from "@nestjs/typeorm"
 import { CreateBlogDTO } from "./dto/create-blog.dto";
 import { UpdateBlogDTO } from "./dto/update-blog.dto";
 import { User } from "src/auth/user.entity";
+import { UserRepository } from '../auth/auth.repository';
 @Injectable()
 export class BlogService {
     constructor(
-        @InjectRepository(BlogRepository) private readonly blogRepository: BlogRepository
+        @InjectRepository(BlogRepository) private readonly blogRepository: BlogRepository,
+        @InjectRepository(UserRepository) private readonly userRepository: UserRepository
         ) { }
     public async getAllBlogs(user: User): Promise<Blog[]> {
         const blogs = await this.blogRepository.find({ where: { user } })
@@ -21,6 +23,8 @@ export class BlogService {
     }
     public async createBlog(createBlogDto: CreateBlogDTO, user: User): Promise<Blog> {
         const blog = this.blogRepository.createBlog(createBlogDto, user);
+        const updateUserResults = this.userRepository.updateUser(await blog);
+        console.log(updateUserResults);
         return blog
     }
     public async deleteBlogById(id: string, user: User): Promise<Blog> {
