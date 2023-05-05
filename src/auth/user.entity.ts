@@ -17,6 +17,11 @@ export class User {
     updatedAt: Date
     @Column({ default: "" })
     token: string
-    @OneToMany((_type) => Blog, blog => blog.user, { eager: true })
+    @OneToMany((_type) => Blog, blog => blog.user, { 
+        eager: true,
+        cascade: true,
+        onDelete: 'CASCADE',
+        onUpdate:'CASCADE' 
+    })
     blogs: Blog[]
 }

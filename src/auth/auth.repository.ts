@@ -32,7 +32,7 @@ export class UserRepository extends Repository<User> {
         delete copyBlog.user
         delete copyBlog.createdAt
         delete copyBlog.updatedAt
-        const updateUser = await this.update(blog.user, { blogs: [copyBlog] });
+        const updateUser = await this.update(blog.user, {blogs: [copyBlog]});
         return updateUser
     }
     async deleteBlogFromUser(blog: Blog, user: User): Promise<object>{
