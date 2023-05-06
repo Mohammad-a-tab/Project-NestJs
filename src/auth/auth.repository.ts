@@ -27,14 +27,6 @@ export class UserRepository extends Repository<User> {
         })
         return userCreated;
     }
-    async updateUser(blog: Blog): Promise<object> {
-        const copyBlog = JSON.parse(JSON.stringify(blog))
-        delete copyBlog.user
-        delete copyBlog.createdAt
-        delete copyBlog.updatedAt
-        const updateUser = await this.update(blog.user, {blogs: [copyBlog]});
-        return updateUser
-    }
     async deleteBlogFromUser(blog: Blog, user: User): Promise<object>{
         const userFind = await this.findOne({where: { name: user.name }})
         const remove =  await this.remove(userFind.blogs[blog.id])

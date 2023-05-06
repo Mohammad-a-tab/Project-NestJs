@@ -7,6 +7,7 @@ import { LoginUserDTO } from "./dto/login-user.dto";
 import { AccessToken } from "./token.interface";
 import { Payload } from "./auth.payload";
 import { JwtService } from "@nestjs/jwt";
+import { User } from './user.entity';
 @Injectable()
 export class AuthService {
     constructor(
@@ -34,5 +35,8 @@ export class AuthService {
         } else {
             throw new UnauthorizedException('Email or password is not true, please trining  again')
         }
+    }
+    async getAll(): Promise<User[]> {
+        return await this.userRepository.find({});
     }
 }

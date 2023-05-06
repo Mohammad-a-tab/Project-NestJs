@@ -23,15 +23,11 @@ export class BlogService {
     }
     public async createBlog(createBlogDto: CreateBlogDTO, user: User): Promise<Blog> {
         const blog = this.blogRepository.createBlog(createBlogDto, user);
-        const updateUserResults = this.userRepository.updateUser(await blog);
-        console.log(updateUserResults);
         return blog
     }
     public async deleteBlogById(id: string, user: User): Promise<Blog> {
         const blog = await this.getBlogById(id, user);
-        console.log(blog);
         
-        await this.blogRepository.remove(blog);
         return blog;
     }
     public async updateBlog(id: string, updateBlogDto: UpdateBlogDTO, user: User): Promise<Blog> {
