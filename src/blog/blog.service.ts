@@ -14,7 +14,7 @@ export class BlogService {
         const blogs = await this.blogRepository.find()
         return blogs
     }
-    public async getBlogById(id: string, user: User): Promise<Blog> {
+    public async getBlogById(id: string): Promise<Blog> {
         const blog = await this.blogRepository.findOne({ where: { id } });
         if (!blog) throw new NotFoundException(`Not Found Blog with id : ${id}`)
         return blog;
@@ -23,8 +23,8 @@ export class BlogService {
         const blog = this.blogRepository.createBlog(createBlogDto, user);
         return blog
     }
-    public async deleteBlogById(id: string, user: User): Promise<Blog> {
-        const blog = await this.getBlogById(id, user);
+    public async deleteBlogById(id: string): Promise<Blog> {
+        const blog = await this.getBlogById(id);
         await this.blogRepository.remove(blog);
         return blog;
     }

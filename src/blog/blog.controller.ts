@@ -1,9 +1,10 @@
-import { Body, Controller, Param, Get, Post, Req, Delete, UseGuards } from '@nestjs/common';
+import { Body, Controller, Param, Get, Post, Req, Delete, UseGuards, Patch } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateBlogDTO } from './dto/create-blog.dto';
 import { Blog } from './blog.entity';
 import { BlogIdDTO } from './dto/id-blog.dto';
+import { UpdateBlogDTO } from './dto/update-blog.dto';
 
 @Controller('blog')
 @UseGuards(AuthGuard())
@@ -23,16 +24,20 @@ export class BlogController {
         const blogs = this.blogService.getAllBlogs();
         return blogs
     }
-    @Get(":id")
-    public getBlogById(@Param() blogIdDto: BlogIdDTO, @Req() req): Promise<Blog> {
-        const user = req.user;
+    @Get(':id')
+    public getBlogById(@Param() blogIdDto: BlogIdDTO): Promise<Blog> {
         const { id } = blogIdDto
-        return this.blogService.getBlogById(id, user);
+        return this.blogService.getBlogById(id);
     }
-    @Delete(":id")
-    public deleteBlogById(@Param() blogIdDto: BlogIdDTO, @Req() req): Promise<object> {
-        const user = req.user;
+    @Delete(':id')
+    public deleteBlogById(@Param() blogIdDto: BlogIdDTO): Promise<object> {
         const { id } = blogIdDto;
-        return this.blogService.deleteBlogById(id, user);
+        return this.blogService.deleteBlogById(id);
+    }
+    @Patch(':id')
+    public updateBlogById(@Param() blogId: BlogIdDTO, @Body() updateBlogDto: UpdateBlogDTO, @Req() req): Promise<object> {
+        const user = req.user;
+        const { id } = blogId;
+        return this.blogService.updateBlog(id, updateBlogDto, user);
     }
 }

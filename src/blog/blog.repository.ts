@@ -29,7 +29,7 @@ export class BlogRepository extends Repository<Blog> {
         if (updateBlogDto['user']) {
             delete updateBlogDto['user']
         }
-        await this.update({ id, user }, { ...updateBlogDto })
+        await this.update({ id }, { ...updateBlogDto })
         return this.findOneBy({id})
     }
 }
