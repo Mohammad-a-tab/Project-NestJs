@@ -5,7 +5,6 @@ import { CreateBlogDTO } from './dto/create-blog.dto';
 import { Blog } from './blog.entity';
 import { BlogIdDTO } from './dto/id-blog.dto';
 
-
 @Controller('blog')
 @UseGuards(AuthGuard())
 export class BlogController {

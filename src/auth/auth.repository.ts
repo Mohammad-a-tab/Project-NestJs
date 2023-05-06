@@ -3,7 +3,6 @@ import { RegisterUserDTO } from "src/auth/dto/register-user.dto";
 import { User } from "src/auth/user.entity";
 import * as bcrypt from 'bcrypt'
 import { BadRequestException, Injectable, InternalServerErrorException } from "@nestjs/common";
-import { Blog } from "src/blog/blog.entity";
 
 @Injectable()
 export class UserRepository extends Repository<User> {
@@ -26,11 +25,5 @@ export class UserRepository extends Repository<User> {
             throw new InternalServerErrorException("we don't Signup you. Wrong some thing please trining again")
         })
         return userCreated;
-    }
-    async deleteBlogFromUser(blog: Blog, user: User): Promise<object>{
-        const userFind = await this.findOne({where: { name: user.name }})
-        const remove =  await this.remove(userFind.blogs[blog.id])
-        return remove
-    }
-    
+    }    
 }
