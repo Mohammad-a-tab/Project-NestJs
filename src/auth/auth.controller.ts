@@ -3,7 +3,7 @@ import { AuthService } from "./auth.service";
 import { LoginUserDTO } from "./dto/login-user.dto";
 import { RegisterUserDTO } from "./dto/register-user.dto";
 import { AccessToken } from "./token.interface";
-import { User } from "./user.entity";
+// import { User } from "./user.entity";
 
 @Controller('auth')
 export class AuthController {
@@ -18,8 +18,8 @@ export class AuthController {
     signIn(@Body() loginUserDto: LoginUserDTO): Promise<AccessToken> {
         return this.authService.signIn(loginUserDto)
     }
-    @Get()
-    getall(): Promise<User[]> {
-        return this.authService.getAll();
-    }
+    // @Get()
+    // getall(): Promise<User[]> {
+    //     return this.authService.getAll();
+    // }
 }
