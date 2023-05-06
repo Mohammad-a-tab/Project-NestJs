@@ -27,7 +27,7 @@ export class BlogService {
     }
     public async deleteBlogById(id: string, user: User): Promise<Blog> {
         const blog = await this.getBlogById(id, user);
-        
+        await this.blogRepository.remove(blog);
         return blog;
     }
     public async updateBlog(id: string, updateBlogDto: UpdateBlogDTO, user: User): Promise<Blog> {
