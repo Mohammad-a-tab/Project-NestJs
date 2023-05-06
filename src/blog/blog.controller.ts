@@ -19,9 +19,8 @@ export class BlogController {
         return this.blogService.createBlog(createBlogDto, user);
     }
     @Get()
-    public getAllBlogs(@Req() req): Promise<Blog[]> {
-        const user = req.user;
-        const blogs = this.blogService.getAllBlogs(user);
+    public getAllBlogs(): Promise<Blog[]> {
+        const blogs = this.blogService.getAllBlogs();
         return blogs
     }
     @Get(":id")

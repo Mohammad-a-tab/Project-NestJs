@@ -10,8 +10,8 @@ export class BlogService {
     constructor(
         @InjectRepository(BlogRepository) private readonly blogRepository: BlogRepository
         ) { }
-    public async getAllBlogs(user: User): Promise<Blog[]> {
-        const blogs = await this.blogRepository.find({ where: { user } })
+    public async getAllBlogs(): Promise<Blog[]> {
+        const blogs = await this.blogRepository.find()
         return blogs
     }
     public async getBlogById(id: string, user: User): Promise<Blog> {
