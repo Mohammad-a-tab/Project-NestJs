@@ -22,6 +22,7 @@ export class BlogController {
         return this.blogService.createBlog(createBlogDto, user);
     }
     @Get('get-all')
+    @ApiResponse({ status: 200, description: 'List of blogs' })
     public getAllBlogs(): Promise<Blog[]> {
         const blogs = this.blogService.getAllBlogs();
         return blogs
