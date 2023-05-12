@@ -1,5 +1,5 @@
 import { Body, Controller, Param, Get, Post, Req, Delete, UseGuards, Patch } from '@nestjs/common';
-import { ApiTags, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiResponse, ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
 import { BlogService } from './blog.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateBlogDTO } from './dto/create-blog.dto';
@@ -8,8 +8,10 @@ import { BlogIdDTO } from './dto/id-blog.dto';
 import { UpdateBlogDTO } from './dto/update-blog.dto';
 
 @ApiTags('blogs')
+@ApiBearerAuth()
 @Controller('blogs')
 @UseGuards(AuthGuard())
+@ApiSecurity('bearerAuth')
 export class BlogController {
     constructor(
         private readonly blogService: BlogService
