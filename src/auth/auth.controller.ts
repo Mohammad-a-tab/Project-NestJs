@@ -3,7 +3,7 @@ import { AuthService } from "./auth.service";
 import { LoginUserDTO } from "./dto/login-user.dto";
 import { RegisterUserDTO } from "./dto/register-user.dto";
 import { AccessToken } from "./token.interface";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiTags, ApiBody, ApiConsumes } from "@nestjs/swagger";
 // import { User } from "./user.entity";
 
 @ApiTags('auth')
@@ -17,6 +17,18 @@ export class AuthController {
         return this.authService.signup(registerUserDto);
     }
     @Post('signIn')
+    @ApiConsumes('application/x-www-form-urlencoded')
+    @ApiBody({
+        description: 'Login user',
+        schema: {
+            type: 'object',
+            properties: {
+                email : { type: 'string' },
+                password : { type: 'string' }
+            },
+            required: ['email', 'password'],
+        },
+    })
     signIn(@Body() loginUserDto: LoginUserDTO): Promise<AccessToken> {
         return this.authService.signIn(loginUserDto)
     }
