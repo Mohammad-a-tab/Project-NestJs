@@ -13,6 +13,19 @@ export class AuthController {
         private readonly authService: AuthService
     ) { }
     @Post('signup')
+    @ApiConsumes('application/x-www-form-urlencoded')
+    @ApiBody({
+        description: 'Register user',
+        schema: {
+            type: 'object',
+            properties: {
+                name : { type: 'string' },
+                email : { type: 'string' },
+                password : { type: 'string' }
+            },
+            required: ['name', 'email', 'password'],
+        },
+    })
     signup(@Body() registerUserDto: RegisterUserDTO): Promise<object> {
         return this.authService.signup(registerUserDto);
     }
