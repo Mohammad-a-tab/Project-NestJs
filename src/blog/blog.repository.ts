@@ -1,9 +1,9 @@
 import { ForbiddenException, Injectable, InternalServerErrorException } from "@nestjs/common";
 import { DataSource, Repository } from 'typeorm';
 import { Blog } from './blog.entity';
-import { CreateBlogDTO } from './dto/create-blog.dto';
+import { CreateBlogDTO } from './dtos/create-blog.dto';
 import { User } from 'src/auth/user.entity';
-import { UpdateBlogDTO } from "./dto/update-blog.dto";
+import { UpdateBlogDTO } from "./dtos/update-blog.dto";
 
 @Injectable()
 export class BlogRepository extends Repository<Blog> {

@@ -1,5 +1,5 @@
 import { DataSource, Repository } from "typeorm";
-import { RegisterUserDTO } from "src/auth/dto/register-user.dto";
+import { RegisterUserDTO } from "src/auth/dtos/register-user.dto";
 import { User } from "src/auth/user.entity";
 import * as bcrypt from 'bcrypt'
 import { BadRequestException, Injectable, InternalServerErrorException } from "@nestjs/common";

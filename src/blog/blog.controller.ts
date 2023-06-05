@@ -2,10 +2,10 @@ import { Body, Controller, Param, Get, Post, Req, Delete, UseGuards, Patch } fro
 import { ApiTags, ApiResponse, ApiBearerAuth, ApiSecurity, ApiConsumes, ApiBody, ApiParam } from '@nestjs/swagger';
 import { BlogService } from './blog.service';
 import { AuthGuard } from '@nestjs/passport';
-import { CreateBlogDTO } from './dto/create-blog.dto';
+import { CreateBlogDTO } from './dtos/create-blog.dto';
 import { Blog } from './blog.entity';
-import { BlogIdDTO } from './dto/id-blog.dto';
-import { UpdateBlogDTO } from './dto/update-blog.dto';
+import { BlogIdDTO } from './dtos/id-blog.dto';
+import { UpdateBlogDTO } from './dtos/update-blog.dto';
 
 @ApiTags('blogs')
 @ApiBearerAuth()
